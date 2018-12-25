@@ -13,6 +13,7 @@ app.use(morgan('dev'));
 
 
 //Routes (rutas)
+app.use(require('./routes'));
 
 // Public (Publica)
 
