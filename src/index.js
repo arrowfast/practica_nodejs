@@ -20,14 +20,20 @@ app.set('view engine','.hbs');
 
 // Middlewares
 app.use(morgan('dev'));
+app.use(express.urlencoded({extended: false})); // aceptar desde los formularios datos
+app.use(express.json()); // aceptar datos json 
 
 // Global Variables (Variables Globales)
-
+app.use((req, res, next)=>{ // middleware
+    next();
+});
 
 //Routes (rutas)
 app.use(require('./routes'));
-
+app.use(require('./routes/authentication'));
+app.use('/links',require('./routes/links'));
 // Public (Publica)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Starting the server (Inicializacion del servidor)
 app.listen(app.get('port'),() => {
